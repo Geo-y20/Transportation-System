@@ -1,0 +1,347 @@
+import datetime
+import math
+class location:
+ def __init__(self, lon, lat):
+  self.lon = lon
+  self.lat = lat
+ def get_lat(self):
+  return self.lat
+ def get_lon(self):
+  return self.lon
+ def set_lat(self,lat2):
+  self.lat=lat2
+ def set_lon(self,lon2):
+  self.lon=lon2
+ def getDistance(self, location1 ):
+  distance = math.sqrt((self.get_lat() - location1.get_lat() )**2 + (self.get_lon() - location1.get_lon())**2)
+  print(distance)
+  return distance
+ def __str__(self):
+  return "({}, {})".format(self.get_lat, self.get_lon)
+
+class Transaction:
+ def __init__(self,type, amount,timestamp):
+  self.amount = amount
+  self.type = type
+  self.timestamp = timestamp
+ timestamp2= datetime.datetime.now()
+ def get_amount(self):
+  return self.amount
+ def get_type(self):
+  return self.type
+ def get_timestamp(self):
+  return self.timestamp
+ def set_amount(self, amount2):
+  self.amount = amount2
+ def set_type(self, type2):
+  self.type = type2
+ def set_timestamp(self, timestamp2):
+  self.timestamp = timestamp2
+ def __str__(self):
+  return f'Transaction({self.get_amount()},{self.get_type()},{self.get_timestamp()})'
+
+class Wallet:
+ def __init__(self, balance, trans_list=[]):
+  self.balance = balance
+  self.trans_list = trans_list
+
+ def get_balance(self):
+  return self.balance
+
+ def get_trans_list(self):
+  return self.trans_list
+
+ def set_balance(self, balance2):
+  self.balance = balance2
+
+ def set_trans_list(self, trans_list2):
+  self.trans_list = trans_list2
+
+ def deposit(self, amount):
+  self.balance += amount
+
+ def withdraw(self, amount):
+  self.balance -= amount
+
+ def transfer(self, wallet2, amount):
+  wallet2 += amount
+  self.balance -= amount
+
+ def addTrans(self, transaction1):
+  self.trans_list().append(transaction1)
+
+ def printTrans(self):
+  for tran in self.trans_list():
+   print(tran)
+
+ def __str__(self):
+  return f'Wallet({self.get_balance()},{self.get_trans_list()})'
+
+
+class Person:
+ def __init__(self, name, add, ssn, rate, wallet: Wallet , loc:location):
+    self.name = name
+    self.add = add
+    self.ssn = ssn
+    self.rate = rate
+    self.loc = loc
+    self.wallet = wallet
+
+class Client(Person):
+ def __init__(self, name, add, ssn, loc:location, wallet:Wallet):
+  self.name=name
+  self.add=add
+  self.ssn=ssn
+  self.loc=loc
+  self.wallet=wallet
+ def get_name(self):
+  return self.name
+ def get_add(self):
+  return self.add
+ def get_ssn(self):
+  return self.ssn
+ def get_loc(self):
+  return self.loc
+ def get_wallet(self):
+  return self.wallet
+ def set_name(self,name2):
+  self.name=name2
+ def set_add(self,add2):
+  self.add=add2
+ def set_ssn(self,ssn2):
+  self.ssn=ssn2
+ def set_loc(self,loc2:location):
+  self.loc=loc2
+ def set_wallet(self,wallet2:Wallet):
+  self.wallet=wallet2
+ def __str__(self):
+  return "{} {} ({}, {}) [{}$]".format(self.get_name(), self.get_add(), self.get_loc().get_lat(),self.get_loc().get_lon(), self.get_wallet().get_balance())
+
+class Driver:
+ def __init__(self, name, add, ssn, rate, wallet: Wallet):
+  self.name = name
+  self.add = add
+  self.ssn = ssn
+  self.rate = rate
+  self.wallet = wallet
+
+ def get_name(self):
+  return self.name
+
+ def get_add(self):
+  return self.add
+
+ def get_ssn(self):
+  return str(self.ssn)
+
+ def get_rate(self):
+  return self.rate
+
+ def get_wallet(self):
+  return self.wallet
+
+ def set_name(self, name2):
+  self.name = name2
+
+ def set_add(self, add2):
+  self.add = add2
+
+ def set_ssn(self, ssn2):
+  self.ssn = ssn2
+
+ def set_rate(self, rate2):
+  self.rate = rate2
+
+ def set_wallet(self, wallet2: Wallet):
+  self.wallet = wallet2
+
+ def __str__(self):
+  return "{} {} {} ({}*) [{}$]".format(self.get_name(), self.get_add(),self.get_ssn(), self.get_rate(), self.get_wallet().get_balance())
+
+
+class Car:
+ def __init__(self,color,loc:location,driver: Driver ):
+  self.color=color
+  self.loc=loc
+  self.driver=driver
+ def get_color(self):
+  return self.color
+ def get_loc(self):
+  return self.loc
+ def get_driver(self):
+  return self.driver
+ def set_color(self,color2):
+  self.color=color2
+ def set_loc(self,loc2:location):
+  self.loc = loc2
+ def set_driver(self, driver2:Driver):
+  self.driver = driver2
+ def getDistance(self, client1:Client ):
+  distance = math.sqrt((self.get_loc().get_lat() - client1.get_loc().get_lat() )**2 + (self.get_loc().get_lon() - client1.get_loc().get_lon())**2)
+  print(distance)
+  return distance
+ def __str__(self):
+  return "{} ({}, {}) [{}-{}*]".format(self.get_color(), self.get_loc().get_lat(),self.get_loc().get_lon(), self.get_driver().get_name(),self.get_driver().get_rate() )
+
+class Ride:
+ def __init__(self,client:Client,car:Car,dest:location, src:location):
+  self.client=client
+  self.car=car
+  self.dest=dest
+  self.src=src
+ def get_client(self):
+  return self.client
+ def get_car(self):
+  return self.car
+ def get_dest(self):
+  return self.dest
+ def get_src(self):
+  return self.src
+ def set_client(self,client2):
+  self.client=client2
+ def set_car(self,car2):
+  self.car = car2
+ def set_dest(self, dest2):
+  self.dest = dest2
+ def set_src(self,src2):
+  self.src=src2
+ def calcDistance(self):
+  distance = math.sqrt((self.get_src().get_lat() - self.get_dest().get_lat())**2 + (self.get_src().get_lon() - self.get_dest().get_lon())**2)
+  print(distance)
+  return distance
+ def getFare(self):
+    return (self.calcDistance() * 10) * (1 + self.get_car().get_driver().get_rate())
+ def __str__(self):
+  return "{} = {} ({}, {})->({}, {}) [{} - {} $]".format(self.get_client().get_name(), self.get_car().get_driver().get_name(), self.get_src().get_lat(),self.get_src().get_lon(), self.get_dest().get_lat(),self.get_dest().get_lon(), self.calcDistance(),self.getFare())
+
+
+clients = []
+drivers = []
+cars = []
+rides = []
+location5=location(10,15)
+location6=location(20,40)
+location7=location(15,30)
+wallet1= Wallet(1000)
+wallet2= Wallet(500)
+wallet3= Wallet(700)
+
+client1 = Client("Ahmed","Smouha    ",1231232213,location5,wallet1)
+client2 = Client("Mohamed","Sidibeshr ",4534535   ,location6,wallet2)
+client3 = Client("samir  ","sporting  ",7897987   ,location7,wallet3)
+
+clients.append(client1)
+clients.append(client2)
+clients.append(client3)
+wallet4= Wallet(1300)
+wallet5= Wallet(2000)
+wallet6= Wallet(250)
+wallet7= Wallet(1190)
+driver1=Driver("Samy   ","Clepatra  ",77777777  ,0.1 ,wallet4)
+driver2=Driver("Karim  ","Abu-Kir   ",88888888  ,0.15,wallet5)
+driver3=Driver("Hay    ","Alex      ",99999999  ,0.05,wallet6)
+driver4=Driver("Fouad  ","Alex      ",11111111  ,0.2,wallet7)
+drivers.append(driver1)
+drivers.append(driver2)
+drivers.append(driver3)
+drivers.append(driver4)
+location1=location(7,15)
+location2=location(16,31)
+location3=location(25,39)
+location4=location(75,89)
+
+car1=Car("Black",location1 ,driver1)
+car2=Car("Blue ",location2,driver2)
+car3=Car("Red  ",location3,driver3)
+car4=Car("Green",location4,driver4)
+cars.append(car1)
+cars.append(car2)
+cars.append(car3)
+cars.append(car4)
+
+while True:
+ print("1-List all Clients")
+ print("2-List all Drivers")
+ print("3-List all Cars")
+ print("4-List Customer Transactions")
+ print("5-List Driver Transactions")
+ print("6-Book a Ride")
+ print("7-Display all Rides")
+ print("0-Exit")
+ print(">> ")
+ x=int(input())
+ if x==1:
+  for client in clients:
+   print(client)
+ elif x==2:
+  for driver in drivers:
+   print(driver)
+ elif x==3:
+  for car in cars:
+   print(car)
+ elif x == 6:
+     flag = 0
+     inputs =input("Enter Your Name: ")
+     for client in clients:
+         name = getattr(client, 'name')
+         if (name == inputs):
+             cur_client = client
+             flag = 1
+     if (flag == 0):
+         print("Name not Found!")
+     else:
+         print(cur_client.get_name())
+     min = 999999
+     for car in cars:
+        d = car.getDistance(cur_client)
+        if (d <= min):
+         min=d
+         cur_car = car
+     print("nearest car:")
+     print(car)
+     print("Destance:")
+     print(min)
+     i= input("Confirm (Y/N): ")
+     if i == "N":
+      print("Canceled")
+     elif i== "Y":
+      Latitude= input("Enter Destination Latitude:")
+      Longtude= input("Enter Destination Longtude:")
+      destination= location(Latitude,Longtude)
+      ride1= Ride(cur_client, cur_car, destination, cur_client.get_loc() )
+      print("Estimated Distance:")
+      print(ride1.get_dest().calcDistance(ride1.get_src()))
+      print("Estimated Fare:")
+      Fare= ride1.getFare()
+      print(Fare)
+     else:
+      print("Invalid Input")
+     i_i = input("Confirm (Y/N): ")
+     if i == "N":
+      print("Canceled")
+     elif i == "Y":
+      print("Ride Completed")
+      rides.append(ride1)
+      cur_client.get_wallet().transfer( cur_car.get_driver().get_wallet(), Fare)
+
+     else:
+      print("Invalid Input")
+ elif x == 4:
+      print("Client Name:")
+      print(cur_client.get_name())
+      print("Balance:")
+      print(cur_client.get_wallet().get_balance())
+      print(cur_client.get_wallet().printTrans())
+
+ elif x==5:
+      print("Driver Name:")
+      print(cur_car.get_name())
+      print("Balance:")
+      print(cur_car.get_driver().get_wallet().get_balance())
+      print(cur_car.get_driver().get_wallet().printTrans())
+
+ elif x==7:
+       for r in rides:
+           print(r)
+ else:
+    exit()
