@@ -1,46 +1,79 @@
-# Transportation System
+# Python Ride-Sharing System
 
-This is a transportation system project that allows clients to book rides using available cars and drivers.
-
+This is a Python ride-sharing system implementation that allows clients to book rides with drivers using cars.
 ## Requirements
-- Python 3.11.1 or later
 
+- Python 3.11.1 or later
 ## Usage
 
 1. Clone the repository: git clone https://github.com/Geo-y20/Transportation-System.git
-2. Navigate to the project directory: cd Transportation-System
-3. Run the main script:python main.py
-4. Choose one of the following options:
+2.Navigate to the project directory: cd Transportation-System
 
-- 1: List all clients
-- 2: List all drivers
-- 3: List all cars
-- 4: List customer transactions
-- 5: List driver transactions
-- 6: Book a ride
-- 7: Display all rides
-- 0: Exit
+3. Run the main script: python main.py
+
 
 ## Classes
 
-The project consists of the following classes:
+### `Location`
 
-- `Location`: Represents a location with longitude and latitude coordinates.
-- `Transaction`: Represents a transaction with a type, amount, and timestamp.
-- `Wallet`: Represents a wallet with a balance and a list of transactions.
-- `Person`: Represents a person with a name, address, social security number, hourly rate, wallet, and location.
-- `Client`: Inherits from `Person` and represents a client with additional methods and attributes.
-- `Driver`: Represents a driver with a name, address, social security number, hourly rate, and wallet.
-- `Car`: Represents a car with a color, location, and driver.
-- `Ride`: Represents a ride with a client, car, destination, and source.
+- Represents a geographic location with longitude and latitude coordinates.
+- Provides methods to get and set latitude and longitude values.
+- Calculates the distance between two locations using the Euclidean formula.
 
-## Contributing
+### `Transaction`
 
-Contributions to the Transportation System project are welcome. If you find any issues or want to add new features, please feel free to open an issue or submit a pull request.
+- Represents a financial transaction with a type, amount, and timestamp.
+- Provides methods to get and set transaction details.
 
+### `Wallet`
 
+- Represents a wallet for a user, maintaining a balance and a list of transactions.
+- Provides methods for depositing, withdrawing, and transferring funds.
+- Allows adding transactions and printing the transaction history.
 
+### `Person`
 
+- Base class representing a person with a name, address, social security number, rate, wallet, and location.
 
+### `Client`
 
+- Represents a client using the ride-sharing system.
+- Inherits from the `Person` class and includes additional methods and attributes specific to clients.
 
+### `Driver`
+
+- Represents a driver available in the ride-sharing system.
+- Inherits from the `Person` class and includes additional methods and attributes specific to drivers.
+
+### `Car`
+
+- Represents a car used for rides in the ride-sharing system.
+- Holds information about the car's color, location, and driver.
+- Provides methods to get and set car details and calculate the distance between the car and a client.
+
+### `Ride`
+
+- Represents a ride booking between a client and a car/driver.
+- Stores information about the client, car, source and destination locations.
+- Calculates the distance and fare for the ride.
+
+## Usage
+
+The code includes a simple command-line interface (CLI) for interacting with the ride-sharing system. The available options are:
+
+1. List all clients
+2. List all drivers
+3. List all cars
+4. List customer transactions
+5. List driver transactions
+6. Book a ride
+7. Display all rides
+0. Exit
+
+Please note that this implementation is a basic demonstration and may require further enhancements for a real-world scenario.
+
+---
+
+Feel free to modify and improve this README file according to your project's specific requirements and additional information you may want to include.
+
+Good luck with your project! If you have any further questions, feel free to ask.
