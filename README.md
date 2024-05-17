@@ -6,8 +6,7 @@ This is a Python ride-sharing system implementation that allows clients to book 
 - Python 3.11.1 or later
 ## Usage
 
-1. Clone the repository: git clone https://github.com/Geo-y20/Transportation-System.git
-2.Navigate to the project directory: cd Transportation-System
+- Clone the repository: git clone https://github.com/Geo-y20/Transportation-System.git
 
 3. Run the main script: python main.py
 
